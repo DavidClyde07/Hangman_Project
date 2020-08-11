@@ -4,7 +4,6 @@
 ############################################################
 
 import pygame
-import os
 
 pygame.init()  #Initializing the pygame module
 
