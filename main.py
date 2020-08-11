@@ -54,10 +54,7 @@ LETTER_FONT = pygame.font.SysFont("comicsans", 40)
 for i in range(26):
   x = x_start + GAP*2 + ((RADIUS*2 + GAP) * (i % 13))
   y = y_start + ((i // 13) * (GAP + RADIUS * 2))
-  letters.append([x,y, chr(A + i)]) #cast chr to get the ASCII charater with the code A+i, as i increments you get B , C etc...
-
-
-
+  letters.append([x,y, chr(A + i), True]) #cast chr to get the ASCII charater with the code A+i, as i increments you get B , C etc...
 
 
 ####################################################################################
@@ -70,11 +67,12 @@ def draw() :
   
   #Drawing buttons
   for letter in letters :
-    x , y, ltr  = letter #Unpacking letter. Recall each element in looks like [x,y, A+i]
-    #drawing each cicle parameters are where, color, start pos, radius, line weight
-    pygame.draw.circle(window, BLACK, (x, y), RADIUS, 3) 
-    text = LETTER_FONT.render(ltr, 1, BLACK)
-    window.blit(text, (x - text.get_width()/2, y - text.get_height()/2))
+    x , y, ltr, visible  = letter #Unpacking letter. Recall each element in looks like [x,y, A+i, visible boolean]
+    if visible:
+      #drawing each cicle parameters are where, color, start pos, radius, line weight
+      pygame.draw.circle(window, BLACK, (x, y), RADIUS, 3) 
+      text = LETTER_FONT.render(ltr, 1, BLACK)
+      window.blit(text, (x - text.get_width()/2, y - text.get_height()/2))
   
   
   window.blit(images[hangman_status], (100,150))
@@ -106,10 +104,12 @@ while run:
       #print(pos)
 
       for letter in letters:
-        x,y,ltr = letter
-        distance = math.sqrt((x-x_mouse)**2 + (y-y_mouse)**2)
-        if distance < RADIUS:
-          print(ltr)
+        x,y,ltr,visible = letter
+        if visible:
+          distance = math.sqrt((x-x_mouse)**2 + (y-y_mouse)**2)
+          #when a letter is clicked make it disappear by setting visible boolean to False
+          if distance < RADIUS:
+            letter[3] = False
 
 
 pygame.quit()
