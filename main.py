@@ -5,6 +5,7 @@
 import pygame
 import math
 import random
+#from function import printtest
 
 pygame.init()  #Initializing the pygame module
 
@@ -47,7 +48,7 @@ x_start = round((WIDTH - (RADIUS*2 + GAP) * 13 ) / 2 )
 y_start = 400 
 A = 65 #ASCII code for the letter A
 
-words = ["HANGMAN", "DEVELOPER", "GEOMATICS", ]  #List to store the word to be guessed
+words = ["HANGMAN", "DEVELOPER", "GEOMATICS", "JAVA", "PYTHON","HASHTABLE","BINARY", "VOLATILE","HEAP" ]  #List to store the word to be guessed
 secret_word = random.choice(words)
 guessed = [] #List to store the gussed letters
 
@@ -55,7 +56,7 @@ guessed = [] #List to store the gussed letters
 LETTER_FONT = pygame.font.SysFont("comicsans", 40)
 WORD_FONT = pygame.font.SysFont("comicsans", 60)
 TITLE_FONT = pygame.font.SysFont("comicsans", 70)
-TITLE = "DEVELOPER HANGMAN!"
+TITLE = "SIMPLE HANGMAN!"
 
 for i in range(26):
   x = x_start + GAP*2 + ((RADIUS*2 + GAP) * (i % 13))
@@ -165,4 +166,5 @@ def main():
 
 
 main()
+#printtest()
 pygame.quit()
